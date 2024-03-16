@@ -29,4 +29,25 @@ public class ScoreboardTests
     scoreboard.StartMatch(secondMatch.homeTeam, secondMatch.awayTeam);
     Assert.AreEqual(2, scoreboard.GetMatches().Count);
   }
+
+  [TestMethod]
+  public void UpdateMatch_WithValidScores_SetsScore()
+  {
+    var (homeTeam, awayTeam, homeScore, awayScore) = DummyMatchesRepository.Get()[0];
+    var scoreboard = new Scoreboard();
+    scoreboard.StartMatch(homeTeam, awayTeam);
+    scoreboard.UpdateMatch(homeTeam, awayTeam, homeScore, awayScore);
+    Assert.AreEqual(homeScore, scoreboard.GetMatches()[0].HomeScore);
+    Assert.AreEqual(awayScore, scoreboard.GetMatches()[0].AwayScore);
+  }
+
+  [TestMethod]
+  [ExpectedException(typeof(ArgumentException))]
+  public void UpdateMatch_WithInvalidValidScores_ThrowsArgumentException()
+  {
+    var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
+    var scoreboard = new Scoreboard();
+    scoreboard.StartMatch(homeTeam, awayTeam);
+    scoreboard.UpdateMatch(homeTeam, awayTeam, -1, -1);
+  }
 }

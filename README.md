@@ -7,10 +7,15 @@ The Sportradar Live Football World Cup Scoreboard is a library for dotnet progra
 ## 🚀 Usage
 Start a new match:
 ```C#
+var scoreboard = new Scoreboard();
+scoreboard.StartMatch("West Ham", "AC Milan");
 ```
 
 Update a score:
 ```C#
+var scoreboard = new Scoreboard();
+scoreboard.StartMatch("West Ham", "AC Milan");
+scoreboard.UpdateMatch("West Ham", "AC Milan", 1, 1);
 ```
 
 Finish a match:
