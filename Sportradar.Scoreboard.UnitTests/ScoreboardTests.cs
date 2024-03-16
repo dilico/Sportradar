@@ -50,4 +50,26 @@ public class ScoreboardTests
     scoreboard.StartMatch(homeTeam, awayTeam);
     scoreboard.UpdateMatch(homeTeam, awayTeam, -1, -1);
   }
+
+  [TestMethod]
+  public void FinishMatch_WhenMatchInList_RemovesMatchFromList()
+  {
+    var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
+    var scoreboard = new Scoreboard();
+    scoreboard.StartMatch(homeTeam, awayTeam);
+    scoreboard.FinishMatch(homeTeam, awayTeam);
+    Assert.AreEqual(0, scoreboard.GetMatches().Count);
+  }
+
+  [TestMethod]
+  public void FinishMatch_WhenMatchNotInList_DoesntChangeList()
+  {
+    var firstMatch = DummyMatchesRepository.Get()[0];
+    var secondMatch = DummyMatchesRepository.Get()[1];
+    var scoreboard = new Scoreboard();
+    scoreboard.StartMatch(firstMatch.homeTeam, firstMatch.awayTeam);
+    Assert.AreEqual(1, scoreboard.GetMatches().Count);
+    scoreboard.FinishMatch(secondMatch.homeTeam, secondMatch.awayTeam);
+    Assert.AreEqual(1, scoreboard.GetMatches().Count);
+  }
 }

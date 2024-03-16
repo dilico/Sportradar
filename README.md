@@ -8,18 +8,31 @@ The Sportradar Live Football World Cup Scoreboard is a library for dotnet progra
 Start a new match:
 ```C#
 var scoreboard = new Scoreboard();
+
 scoreboard.StartMatch("West Ham", "AC Milan");
+// Scoreboard has one match: West Ham 0 - AC Milan 0
 ```
 
 Update a score:
 ```C#
 var scoreboard = new Scoreboard();
+
 scoreboard.StartMatch("West Ham", "AC Milan");
+// Scoreboard has one match: West Ham 0 - AC Milan 0
+
 scoreboard.UpdateMatch("West Ham", "AC Milan", 1, 1);
+// Scoreboard has one match: West Ham 1 - AC Milan 1
 ```
 
 Finish a match:
 ```C#
+var scoreboard = new Scoreboard();
+
+scoreboard.StartMatch("West Ham", "AC Milan");
+// Scoreboard has one match: West Ham 0 - AC Milan 0
+
+scoreboard.FinishMatch("West Ham", "AC Milan");
+// Scoreboard is empty
 ```
 
 Get a summary of matches in progress ordered by their total score:
@@ -27,7 +40,7 @@ Get a summary of matches in progress ordered by their total score:
 ```
 
 ## 💡 Assumptions
-* The only constraint on score updates is that new scores must be positive numbers. There are no requirements on how often a match is updated, so a new score could be less than the current one, for example if a goal has been disallowed.
+* The only constraint on score updates is that new scores must be positive numbers. There are no requirements on how often a match is updated, so a new score could include multiple additional goals. Also, a new score could be less than the current one, if for example a goal has been disallowed.
 
 ## 🙋 Questions
 

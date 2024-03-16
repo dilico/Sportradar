@@ -17,15 +17,24 @@ public class Scoreboard
 
   public void UpdateMatch(string homeTeam, string awayTeam, int homeScore, int awayScore)
   {
-    foreach (var match in Matches)
+    var match = FindMatch(homeTeam, awayTeam);
+    match?.UpdateScores(homeScore, awayScore);
+  }
+
+  public void FinishMatch(string homeTeam, string awayTeam)
+  {
+    var match = FindMatch(homeTeam, awayTeam);
+    if (match != null)
     {
-      if (IsSameTeam(match.HomeTeam, homeTeam)
-        && IsSameTeam(match.AwayTeam, awayTeam))
-      {
-        match.UpdateScores(homeScore, awayScore);
-        break;
-      }
+      Matches.Remove(match);
     }
+  }
+
+  private Match? FindMatch(string homeTeam, string awayTeam)
+  {
+    return Matches
+      .SingleOrDefault(m => IsSameTeam(m.HomeTeam, homeTeam)
+        && IsSameTeam(m.AwayTeam, awayTeam));
   }
 
   private static bool IsSameTeam(Team team, string name)
