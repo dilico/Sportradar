@@ -72,4 +72,44 @@ public class ScoreboardTests
     scoreboard.FinishMatch(secondMatch.homeTeam, secondMatch.awayTeam);
     Assert.AreEqual(1, scoreboard.GetMatches().Count);
   }
+
+  [TestMethod]
+  public void GetMatches_ReturnsMatchesOrderedByTotalScore()
+  {
+    var firstMatch = DummyMatchesRepository.Get()[0];
+    var secondMatch = DummyMatchesRepository.Get()[1];
+    var scoreboard = new Scoreboard();
+    scoreboard.StartMatch(firstMatch.homeTeam, firstMatch.awayTeam);
+    scoreboard.StartMatch(secondMatch.homeTeam, secondMatch.awayTeam);
+    scoreboard.UpdateMatch(secondMatch.homeTeam,
+      secondMatch.awayTeam, 1, 1);
+    var scoreboardMatches = scoreboard.GetMatches();
+    Assert.AreEqual(2, scoreboardMatches.Count);
+    Assert.AreEqual(secondMatch.homeTeam, scoreboardMatches[0].HomeTeam.Name);
+    Assert.AreEqual(secondMatch.awayTeam, scoreboardMatches[0].AwayTeam.Name);
+    Assert.AreEqual(firstMatch.homeTeam, scoreboardMatches[1].HomeTeam.Name);
+    Assert.AreEqual(firstMatch.awayTeam, scoreboardMatches[1].AwayTeam.Name);
+  }
+
+  [TestMethod]
+  public void GetMatches_WithSameScore_ReturnsMatchesOrderedByMostRecent()
+  {
+    var firstMatch = DummyMatchesRepository.Get()[0];
+    var secondMatch = DummyMatchesRepository.Get()[1];
+    var scoreboard = new Scoreboard();
+    scoreboard.StartMatch(firstMatch.homeTeam, firstMatch.awayTeam);
+    scoreboard.UpdateMatch(firstMatch.homeTeam,
+      firstMatch.awayTeam, 1, 1);
+    scoreboard.StartMatch(secondMatch.homeTeam, secondMatch.awayTeam);
+    scoreboard.UpdateMatch(secondMatch.homeTeam,
+      secondMatch.awayTeam, 1, 1);
+    var scoreboardMatches = scoreboard.GetMatches();
+    Console.WriteLine(scoreboardMatches[0].StartTime);
+    Console.WriteLine(scoreboardMatches[1].StartTime);
+    Assert.AreEqual(2, scoreboardMatches.Count);
+    Assert.AreEqual(secondMatch.homeTeam, scoreboardMatches[0].HomeTeam.Name);
+    Assert.AreEqual(secondMatch.awayTeam, scoreboardMatches[0].AwayTeam.Name);
+    Assert.AreEqual(firstMatch.homeTeam, scoreboardMatches[1].HomeTeam.Name);
+    Assert.AreEqual(firstMatch.awayTeam, scoreboardMatches[1].AwayTeam.Name);
+  }
 }

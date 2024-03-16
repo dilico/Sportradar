@@ -8,6 +8,7 @@ public class Match(string homeTeam, string awayTeam)
   public Team AwayTeam => Away.Team;
   public int HomeScore => Home.Score;
   public int AwayScore => Away.Score;
+  public DateTime StartTime { get; } = DateTime.UtcNow;
 
   public void UpdateScores(int homeScore, int awayScore)
   {

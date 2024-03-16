@@ -6,7 +6,10 @@ public class Scoreboard
 
   public IList<Match> GetMatches()
   {
-    return Matches;
+    return Matches
+      .OrderByDescending(m => m.HomeScore + m.AwayScore)
+      .ThenByDescending(m => m.StartTime)
+      .ToList();
   }
 
   public void StartMatch(string homeTeam, string awayTeam)

@@ -22,7 +22,7 @@ public class MatchTests
   }
 
   [TestMethod]
-  public void GetHome_ReturnsAwayTeam()
+  public void GetAway_ReturnsAwayTeam()
   {
     var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
     var match = new Match(homeTeam, awayTeam);
