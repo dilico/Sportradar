@@ -8,4 +8,10 @@ public class Scoreboard
   {
     return Matches;
   }
+
+  public void StartMatch(string homeTeam, string awayTeam)
+  {
+    var match = new Match(homeTeam, awayTeam);
+    Matches.Add(match);
+  }
 }
