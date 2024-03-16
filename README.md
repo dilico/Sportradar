@@ -22,6 +22,7 @@ Get a summary of matches in progress ordered by their total score:
 ```
 
 ## 💡 Assumptions
+* The only constraint on score updates is that new scores must be positive numbers. There are no requirements on how often a match is updated, so a new score could be less than the current one, for example if a goal has been disallowed.
 
 ## 🙋 Questions
 

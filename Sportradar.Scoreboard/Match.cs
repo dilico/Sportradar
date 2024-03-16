@@ -8,4 +8,10 @@ public class Match(string homeTeam, string awayTeam)
   public Team AwayTeam => Away.Team;
   public int HomeScore => Home.Score;
   public int AwayScore => Away.Score;
+
+  public void UpdateScores(int homeScore, int awayScore)
+  {
+    Home.UpdateScore(homeScore);
+    Away.UpdateScore(awayScore);
+  }
 }

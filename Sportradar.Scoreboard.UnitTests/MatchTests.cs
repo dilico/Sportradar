@@ -42,4 +42,26 @@ public class MatchTests
     var match = new Match("West Ham", "AC Milan");
     Assert.AreEqual(0, match.AwayScore);
   }
+
+  [TestMethod]
+  public void Update_WithValidScores_SetsScores()
+  {
+    var homeScore = 1;
+    var awayScore = 1;
+    var match = new Match("West Ham", "AC Milan");
+    match.UpdateScores(homeScore, awayScore);
+    Assert.AreEqual(homeScore, match.HomeScore);
+    Assert.AreEqual(awayScore, match.AwayScore);
+  }
+
+  [TestMethod]
+  [ExpectedException(typeof(ArgumentException))]
+  [DataRow(-1, 2, DisplayName = "Invalid home score")]
+  [DataRow(3, -2, DisplayName = "Invalid away score")]
+  [DataRow(-3, -2, DisplayName = "Invalid home and away scores")]
+  public void UpdateScores_WithInvalidScores_ThrowsArgumentException(int homeScore, int awayScore)
+  {
+    var match = new Match("West Ham", "AC Milan");
+    match.UpdateScores(homeScore, awayScore);
+  }
 }
