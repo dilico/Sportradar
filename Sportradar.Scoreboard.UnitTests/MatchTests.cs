@@ -5,8 +5,8 @@ public class MatchTests
 {
   [TestMethod]
   [ExpectedException(typeof(ArgumentException))]
-  [DataRow(null, "West Ham", DisplayName = "Invalid home team")]
-  [DataRow("West Ham", null, DisplayName = "Invalid away team")]
+  [DataRow(null, "Brazil", DisplayName = "Invalid home team")]
+  [DataRow("Brazil", null, DisplayName = "Invalid away team")]
   [DataRow(null, null, DisplayName = "Invalid home and away teams")]
   public void Create_WithInvalidTeams_ThrowsArgumentException(string home, string away)
   {

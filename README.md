@@ -9,12 +9,12 @@ Start a new match:
 ```C#
 var scoreboard = new Scoreboard();
 
-scoreboard.StartMatch("West Ham", "AC Milan");
-// Scoreboard has one match: West Ham 0 - AC Milan 0
+scoreboard.StartMatch("Brazil", "Germany");
+// Scoreboard has one match: Brazil 0 - Germany 0
 
 scoreboard.StartMatch("Spain", "France");
 // Scoreboard has two matches:
-// West Ham 0 - AC Milan 0
+// Brazil 0 - Germany 0
 // Spain 0 - France 0
 ```
 
@@ -22,21 +22,21 @@ Update a score:
 ```C#
 var scoreboard = new Scoreboard();
 
-scoreboard.StartMatch("West Ham", "AC Milan");
-// Scoreboard has one match: West Ham 0 - AC Milan 0
+scoreboard.StartMatch("Brazil", "Germany");
+// Scoreboard has one match: Brazil 0 - Germany 0
 
-scoreboard.UpdateMatch("West Ham", "AC Milan", 1, 1);
-// Scoreboard has one match: West Ham 1 - AC Milan 1
+scoreboard.UpdateMatch("Brazil", "Germany", 1, 1);
+// Scoreboard has one match: Brazil 1 - Germany 1
 ```
 
 Finish a match:
 ```C#
 var scoreboard = new Scoreboard();
 
-scoreboard.StartMatch("West Ham", "AC Milan");
-// Scoreboard has one match: West Ham 0 - AC Milan 0
+scoreboard.StartMatch("Brazil", "Germany");
+// Scoreboard has one match: Brazil 0 - Germany 0
 
-scoreboard.FinishMatch("West Ham", "AC Milan");
+scoreboard.FinishMatch("Brazil", "Germany");
 // Scoreboard is empty
 ```
 
@@ -44,11 +44,11 @@ Get all matches in progress ordered by their total score (if two or more matches
 ```C#
 var scoreboard = new Scoreboard();
 
-scoreboard.StartMatch("West Ham", "AC Milan");
-// Scoreboard has one match: West Ham 0 - AC Milan 0
+scoreboard.StartMatch("Brazil", "Germany");
+// Scoreboard has one match: Brazil 0 - Germany 0
 
-scoreboard.UpdateMatch("West Ham", "AC Milan", 1, 1);
-// Scoreboard has one match: West Ham 1 - AC Milan 1
+scoreboard.UpdateMatch("Brazil", "Germany", 1, 1);
+// Scoreboard has one match: Brazil 1 - Germany 1
 
 scoreboard.GetMatches();
 ```
@@ -57,14 +57,14 @@ Get a summary of matches in progress ordered by their total score (if two or mor
 ```C#
 var scoreboard = new Scoreboard();
 
-scoreboard.StartMatch("West Ham", "AC Milan");
-// Scoreboard has one match: West Ham 0 - AC Milan 0
+scoreboard.StartMatch("Brazil", "Germany");
+// Scoreboard has one match: Brazil 0 - Germany 0
 
-scoreboard.UpdateMatch("West Ham", "AC Milan", 1, 1);
-// Scoreboard has one match: West Ham 1 - AC Milan 1
+scoreboard.UpdateMatch("Brazil", "Germany", 1, 1);
+// Scoreboard has one match: Brazil 1 - Germany 1
 
 Console.WriteLine(scoreboard.GetSummary());
-// 1. West Ham 1 - AC Milan 1
+// 1. Brazil 1 - Germany 1
 ```
 
 ## 💡 Assumptions
