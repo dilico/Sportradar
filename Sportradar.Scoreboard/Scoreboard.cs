@@ -42,9 +42,9 @@ public class Scoreboard
     for (int i = 0; i < matches.Count; i += 1)
     {
       var match = matches[i];
-      builder.AppendLine(@$"{i+1}. {match.HomeTeam.Name} {match.HomeScore} - {match.AwayTeam.Name} {match.AwayScore}");
+      builder.AppendLine(@$"{i + 1}. {match.HomeTeam.Name} {match.HomeScore} - {match.AwayTeam.Name} {match.AwayScore}");
     }
-    return builder.ToString();
+    return builder.ToString().TrimEnd('\r', '\n');
   }
 
   private Match? FindMatch(string homeTeam, string awayTeam)
