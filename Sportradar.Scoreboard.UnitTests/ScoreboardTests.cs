@@ -104,12 +104,23 @@ public class ScoreboardTests
     scoreboard.UpdateMatch(secondMatch.homeTeam,
       secondMatch.awayTeam, 1, 1);
     var scoreboardMatches = scoreboard.GetMatches();
-    Console.WriteLine(scoreboardMatches[0].StartTime);
-    Console.WriteLine(scoreboardMatches[1].StartTime);
     Assert.AreEqual(2, scoreboardMatches.Count);
     Assert.AreEqual(secondMatch.homeTeam, scoreboardMatches[0].HomeTeam.Name);
     Assert.AreEqual(secondMatch.awayTeam, scoreboardMatches[0].AwayTeam.Name);
     Assert.AreEqual(firstMatch.homeTeam, scoreboardMatches[1].HomeTeam.Name);
     Assert.AreEqual(firstMatch.awayTeam, scoreboardMatches[1].AwayTeam.Name);
+  }
+
+  [TestMethod]
+  public void GetSummary_ReturnsSummaryOfMatchesInOrder()
+  {
+    var scoreboard = new Scoreboard();
+    foreach (var (homeTeam, awayTeam, homeScore, awayScore) in DummyMatchesRepository.Get())
+    {
+      scoreboard.StartMatch(homeTeam, awayTeam);
+      scoreboard.UpdateMatch(homeTeam, awayTeam, homeScore, awayScore);
+    }
+    var expected = @$"1. Uruguay 6 - Italy 6{Environment.NewLine}2. Spain 10 - Brazil 2{Environment.NewLine}3. Mexico 0 - Canada 5{Environment.NewLine}4. Argentina 3 - Australia 1{Environment.NewLine}5. Germany 2 - France 2{Environment.NewLine}";
+    Assert.AreEqual(expected, scoreboard.GetSummary());
   }
 }

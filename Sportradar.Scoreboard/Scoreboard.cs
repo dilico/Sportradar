@@ -1,4 +1,6 @@
-﻿namespace Sportradar.Scoreboard;
+﻿using System.Text;
+
+namespace Sportradar.Scoreboard;
 
 public class Scoreboard
 {
@@ -31,6 +33,18 @@ public class Scoreboard
     {
       Matches.Remove(match);
     }
+  }
+
+  public string GetSummary()
+  {
+    var builder = new StringBuilder();
+    var matches = GetMatches();
+    for (int i = 0; i < matches.Count; i += 1)
+    {
+      var match = matches[i];
+      builder.AppendLine(@$"{i+1}. {match.HomeTeam.Name} {match.HomeScore} - {match.AwayTeam.Name} {match.AwayScore}");
+    }
+    return builder.ToString();
   }
 
   private Match? FindMatch(string homeTeam, string awayTeam)

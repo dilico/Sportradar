@@ -11,6 +11,11 @@ var scoreboard = new Scoreboard();
 
 scoreboard.StartMatch("West Ham", "AC Milan");
 // Scoreboard has one match: West Ham 0 - AC Milan 0
+
+scoreboard.StartMatch("Spain", "France");
+// Scoreboard has two matches:
+// West Ham 0 - AC Milan 0
+// Spain 0 - France 0
 ```
 
 Update a score:
@@ -35,14 +40,36 @@ scoreboard.FinishMatch("West Ham", "AC Milan");
 // Scoreboard is empty
 ```
 
-Get a summary of matches in progress ordered by their total score:
+Get all matches in progress ordered by their total score (if two or more matches have the same total score, they are returned ordered by the most recently started match in the scoreboard):
 ```C#
+var scoreboard = new Scoreboard();
+
+scoreboard.StartMatch("West Ham", "AC Milan");
+// Scoreboard has one match: West Ham 0 - AC Milan 0
+
+scoreboard.UpdateMatch("West Ham", "AC Milan", 1, 1);
+// Scoreboard has one match: West Ham 1 - AC Milan 1
+
+scoreboard.GetMatches();
+```
+
+Get a summary of matches in progress ordered by their total score (if two or more matches have the same total score, they are returned ordered by the most recently started match in the scoreboard):
+```C#
+var scoreboard = new Scoreboard();
+
+scoreboard.StartMatch("West Ham", "AC Milan");
+// Scoreboard has one match: West Ham 0 - AC Milan 0
+
+scoreboard.UpdateMatch("West Ham", "AC Milan", 1, 1);
+// Scoreboard has one match: West Ham 1 - AC Milan 1
+
+Console.WriteLine(scoreboard.GetSummary());
+// 1. West Ham 1 - AC Milan 1
 ```
 
 ## 💡 Assumptions
 * The only constraint on score updates is that new scores must be positive numbers. There are no requirements on how often a match is updated, so a new score could include multiple additional goals. Also, a new score could be less than the current one, if for example a goal has been disallowed.
-
-## 🙋 Questions
+* The scoreboard is implemented as an in-memory list of matches. When either the summary or the list of the matches is requested, the list is sorted according to total score and match start date. For a high number of requests, storing the matches in a sorted list would be more efficient in order to avoid sorting them each time.
 
 ## 👯 Contributors
 <a href="https://github.com/dilico">
