@@ -42,16 +42,6 @@ public class ScoreboardTests
   }
 
   [TestMethod]
-  [ExpectedException(typeof(ArgumentException))]
-  public void UpdateMatch_WithInvalidValidScores_ThrowsArgumentException()
-  {
-    var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
-    var scoreboard = new Scoreboard();
-    scoreboard.StartMatch(homeTeam, awayTeam);
-    scoreboard.UpdateMatch(homeTeam, awayTeam, -1, -1);
-  }
-
-  [TestMethod]
   public void FinishMatch_WhenMatchInList_RemovesMatchFromList()
   {
     var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];

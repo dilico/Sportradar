@@ -14,6 +14,13 @@ public class MatchTests
   }
 
   [TestMethod]
+  [ExpectedException(typeof(ArgumentException))]
+  public void Create_WithSameTeams_ThrowsArgumentException()
+  {
+    _ = new Match("Brazil", "Brazil");
+  }
+
+  [TestMethod]
   public void GetHomeTeam_ReturnsHomeTeam()
   {
     var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
