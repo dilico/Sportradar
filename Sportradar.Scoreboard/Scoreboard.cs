@@ -6,14 +6,6 @@ public class Scoreboard
 {
   private IList<Match> Matches { get; } = [];
 
-  public IList<Match> GetMatches()
-  {
-    return Matches
-      .OrderByDescending(m => m.HomeScore + m.AwayScore)
-      .ThenByDescending(m => m.StartTime)
-      .ToList();
-  }
-
   public void StartMatch(string homeTeam, string awayTeam)
   {
     var match = new Match(homeTeam, awayTeam);
@@ -35,6 +27,11 @@ public class Scoreboard
     }
   }
 
+  public IList<Match> GetMatches() => Matches
+    .OrderByDescending(m => m.HomeScore + m.AwayScore)
+    .ThenByDescending(m => m.StartTime)
+    .ToList();
+
   public string GetSummary()
   {
     var builder = new StringBuilder();
@@ -47,16 +44,10 @@ public class Scoreboard
     return builder.ToString().TrimEnd('\r', '\n');
   }
 
-  private Match? FindMatch(string homeTeam, string awayTeam)
-  {
-    return Matches
-      .SingleOrDefault(m => IsSameTeam(m.HomeTeam, homeTeam)
-        && IsSameTeam(m.AwayTeam, awayTeam));
-  }
+  private Match? FindMatch(string homeTeam, string awayTeam) =>
+    Matches.SingleOrDefault(m => IsSameTeam(m.HomeTeam, homeTeam)
+      && IsSameTeam(m.AwayTeam, awayTeam));
 
-  private static bool IsSameTeam(Team team, string name)
-  {
-    return string.Equals(team.Name.Trim(), name?.Trim(),
-      StringComparison.OrdinalIgnoreCase);
-  }
+  private static bool IsSameTeam(Team team, string name) =>
+    string.Equals(team.Name.Trim(), name?.Trim(), StringComparison.OrdinalIgnoreCase);
 }

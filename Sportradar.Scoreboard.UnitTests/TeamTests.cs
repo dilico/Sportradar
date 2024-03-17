@@ -9,7 +9,7 @@ public class TeamTests
   [DataRow("Brazil ", "Brazil")]
   [DataRow(" Brazil ", "Brazil")]
   [DataRow("  Brazil  ", "Brazil")]
-  public void Create_SetsName(string name, string expected)
+  public void Create_SetsTeamName(string name, string expected)
   {
     var team = new Team(name);
     Assert.AreEqual(expected, team.Name);

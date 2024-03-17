@@ -123,4 +123,11 @@ public class ScoreboardTests
     var expected = @$"1. Uruguay 6 - Italy 6{Environment.NewLine}2. Spain 10 - Brazil 2{Environment.NewLine}3. Mexico 0 - Canada 5{Environment.NewLine}4. Argentina 3 - Australia 1{Environment.NewLine}5. Germany 2 - France 2";
     Assert.AreEqual(expected, scoreboard.GetSummary());
   }
+
+  [TestMethod]
+  public void GetSummary_EmptyScoreboard_ReturnsEmptyString()
+  {
+    var scoreboard = new Scoreboard();
+    Assert.IsTrue(string.IsNullOrEmpty(scoreboard.GetSummary()));
+  }
 }

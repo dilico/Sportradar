@@ -14,7 +14,7 @@ public class MatchTests
   }
 
   [TestMethod]
-  public void GetHome_ReturnsHomeTeam()
+  public void GetHomeTeam_ReturnsHomeTeam()
   {
     var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
     var match = new Match(homeTeam, awayTeam);
@@ -22,7 +22,7 @@ public class MatchTests
   }
 
   [TestMethod]
-  public void GetAway_ReturnsAwayTeam()
+  public void GetAwayTeam_ReturnsAwayTeam()
   {
     var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
     var match = new Match(homeTeam, awayTeam);
@@ -46,7 +46,7 @@ public class MatchTests
   }
 
   [TestMethod]
-  public void Update_WithValidScores_SetsScores()
+  public void UpdateScores_WithValidScores_SetsScores()
   {
     var homeScore = 1;
     var awayScore = 1;

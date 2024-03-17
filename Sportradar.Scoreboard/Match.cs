@@ -2,17 +2,23 @@
 
 public class Match(string homeTeam, string awayTeam)
 {
-  private TeamWithScore Home { get; } = new TeamWithScore(new Team(homeTeam));
-  private TeamWithScore Away { get; } = new TeamWithScore(new Team(awayTeam));
-  public Team HomeTeam => Home.Team;
-  public Team AwayTeam => Away.Team;
-  public int HomeScore => Home.Score;
-  public int AwayScore => Away.Score;
+  public Team HomeTeam { get; } = new Team(homeTeam);
+  public Team AwayTeam { get; } = new Team(awayTeam);
+  public int HomeScore { get; private set; } = 0;
+  public int AwayScore { get; private set; } = 0;
   public DateTime StartTime { get; } = DateTime.UtcNow;
 
   public void UpdateScores(int homeScore, int awayScore)
   {
-    Home.UpdateScore(homeScore);
-    Away.UpdateScore(awayScore);
+    if (homeScore < 0)
+    {
+      throw new ArgumentException("Home score cannot be negative");
+    }
+    if (awayScore < 0)
+    {
+      throw new ArgumentException("Away score cannot be negative");
+    }
+    HomeScore = homeScore;
+    AwayScore = awayScore;
   }
 }
