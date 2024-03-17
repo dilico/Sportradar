@@ -20,7 +20,7 @@ public class Match
     AwayTeam = away;
   }
 
-  public void UpdateScores(int homeScore, int awayScore)
+  public void UpdateScore(int homeScore, int awayScore)
   {
     if (homeScore < 0)
     {

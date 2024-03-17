@@ -12,10 +12,10 @@ public class Scoreboard
     Matches.Add(match);
   }
 
-  public void UpdateMatch(string homeTeam, string awayTeam, int homeScore, int awayScore)
+  public void UpdateScore(string homeTeam, string awayTeam, int homeScore, int awayScore)
   {
     var match = FindMatch(homeTeam, awayTeam);
-    match?.UpdateScores(homeScore, awayScore);
+    match?.UpdateScore(homeScore, awayScore);
   }
 
   public void FinishMatch(string homeTeam, string awayTeam)

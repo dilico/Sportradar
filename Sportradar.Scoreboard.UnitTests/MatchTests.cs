@@ -53,13 +53,13 @@ public class MatchTests
   }
 
   [TestMethod]
-  public void UpdateScores_WithValidScores_SetsScores()
+  public void UpdateScore_WithValidScores_SetsScores()
   {
     var homeScore = 1;
     var awayScore = 1;
     var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
     var match = new Match(homeTeam, awayTeam);
-    match.UpdateScores(homeScore, awayScore);
+    match.UpdateScore(homeScore, awayScore);
     Assert.AreEqual(homeScore, match.HomeScore);
     Assert.AreEqual(awayScore, match.AwayScore);
   }
@@ -69,10 +69,10 @@ public class MatchTests
   [DataRow(-1, 2, DisplayName = "Invalid home score")]
   [DataRow(3, -2, DisplayName = "Invalid away score")]
   [DataRow(-3, -2, DisplayName = "Invalid home and away scores")]
-  public void UpdateScores_WithInvalidScores_ThrowsArgumentException(int homeScore, int awayScore)
+  public void UpdateScore_WithInvalidScores_ThrowsArgumentException(int homeScore, int awayScore)
   {
     var (homeTeam, awayTeam, _, _) = DummyMatchesRepository.Get()[0];
     var match = new Match(homeTeam, awayTeam);
-    match.UpdateScores(homeScore, awayScore);
+    match.UpdateScore(homeScore, awayScore);
   }
 }
